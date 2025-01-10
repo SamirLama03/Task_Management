@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Edit Task: {{ task.title }}</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary m-2">Save changes</button>
+  </form>
+
+  <!-- Cancel button with conditional URL -->
+  {% if task.id %}
+    <a href="{% url 'task_detail' task.id %}" class="btn btn-secondary m-2">Cancel</a>
+  {% else %}
+    <a href="{% url 'tasklist' %}" class="btn btn-secondary m-2">Back to Task List</a>
+  {% endif %}
+{% endblock %}
